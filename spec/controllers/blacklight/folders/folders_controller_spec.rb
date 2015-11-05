@@ -31,7 +31,7 @@ describe Blacklight::Folders::FoldersController do
 
       it 'redirects to home page for invalid folder id' do
         get :show, id: 100000000000
-        expect(response).to redirect_to(main_app.root_url)
+        expect(response).to redirect_to(main_app.root_path)
       end
     end
 
