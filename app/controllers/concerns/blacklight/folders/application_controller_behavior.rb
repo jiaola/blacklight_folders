@@ -48,8 +48,11 @@ module Blacklight::Folders
 
         if current_user.default_folder
           guest_user.folders.each do |f|
-            f.items.each do |i|
-              i.update(folder: current_user.default_folder)
+            bookmarks = f.bookmarks
+            f.items.each_with_index do |item, i|
+              unless current_user.default_folder.documents.find {|doc| bookmarks[i].document_id == doc.id }
+                item.update(folder: current_user.default_folder)
+              end
             end
             f.delete
           end
