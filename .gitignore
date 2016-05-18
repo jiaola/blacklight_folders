@@ -6,3 +6,4 @@ Gemfile.lock
 jetty
 tmp
 spec/internal
+.idea
