@@ -37,7 +37,7 @@ module Blacklight::Folders
         # return [] if doc_ids.empty?
 
         rows = doc_ids.count
-        query_ids = doc_ids.map{|id| RSolr.escape(id) }
+        query_ids = doc_ids.map{|id| RSolr.solr_escape(id) }
         query_ids = query_ids.join(' OR ')
 
         query = query_ids.blank? ? '' : "id:(#{query_ids})"
