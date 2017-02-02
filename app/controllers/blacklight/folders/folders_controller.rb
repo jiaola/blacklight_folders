@@ -3,7 +3,7 @@ require_dependency "blacklight/folders/application_controller"
 module Blacklight::Folders
   class FoldersController < ApplicationController
     include Blacklight::TokenBasedUser
-    include Blacklight::Catalog::SearchContext
+    include Blacklight::SearchContext
 
     load_and_authorize_resource class: Blacklight::Folders::Folder, except: [:add_bookmarks, :remove_bookmarks]
     before_filter :load_and_authorize_folder, only: [:add_bookmarks, :remove_bookmarks]
@@ -16,10 +16,10 @@ module Blacklight::Folders
 
     def index
       if current_user and params[:default] == '1'
-        redirect_to '/myfolders/folders/' + current_user.default_folder.id.to_s
+        redirect_to "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + current_user.default_folder.id.to_s
       end
 
-      @folders = if current_or_guest_user.new_record?
+      @folders = if current_or_guest_user.new_record?+ blacklight_folders.folders_path + "/" +
         # Just show the temporary folder
         current_or_guest_user.folders
       else

@@ -69,13 +69,13 @@ module Blacklight::Folders
       end
 
       def solr_repository
-        @solr_repo ||= Blacklight::SolrRepository.new(blacklight_config)
+        @solr_repo ||= Blacklight::Solr::Repository.new(blacklight_config)
       end
 
       def blacklight_config
          @blacklight_config ||= begin
            ::CatalogController.blacklight_config.deep_copy.tap do |config|
-             config.solr_response_model = Blacklight::Folders::SolrResponse
+             config.response_model = Blacklight::Folders::SolrResponse
            end
          end
       end
