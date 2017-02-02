@@ -19,7 +19,7 @@ module Blacklight::Folders
         redirect_to "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + current_user.default_folder.id.to_s
       end
 
-      @folders = if current_or_guest_user.new_record?+ blacklight_folders.folders_path + "/" +
+      @folders = if current_or_guest_user.new_record?
         # Just show the temporary folder
         current_or_guest_user.folders
       else
