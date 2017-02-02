@@ -70,10 +70,10 @@ module Blacklight::Folders
         else
           respond_to do |format|
             format.html do
-              redirect_to @folder, notice: t(:'helpers.submit.folder.updated')
+              redirect_to "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s, notice: t(:'helpers.submit.folder.updated')
             end
             format.json do
-              render json: @folder
+              render json: "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s
             end
           end
         end
