@@ -1,7 +1,7 @@
 module Blacklight::Folders
   class FolderForm
     def initialize(params)
-      @params = params
+      @params = params.to_h
     end
 
     def update(folder)
