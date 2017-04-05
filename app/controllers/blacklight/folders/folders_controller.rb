@@ -16,7 +16,7 @@ module Blacklight::Folders
 
     def index
       if current_user and params[:default] == '1'
-        redirect_to "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + current_user.default_folder.id.to_s
+        redirect_to "/#{params[:campus]}" + blacklight_folders.folders_path + "/" + current_user.default_folder.id.to_s
       end
 
       @folders = if current_or_guest_user.new_record?
@@ -54,7 +54,7 @@ module Blacklight::Folders
     def create
       @folder.user = current_user
       if @folder.save
-        redirect_to  "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s
+        redirect_to  "/#{params[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s
       else
         render :new
       end
@@ -70,10 +70,10 @@ module Blacklight::Folders
         else
           respond_to do |format|
             format.html do
-              redirect_to "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s, notice: t(:'helpers.submit.folder.updated')
+              redirect_to "/#{params[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s, notice: t(:'helpers.submit.folder.updated')
             end
             format.json do
-              render json: "/#{session[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s
+              render json: "/#{params[:campus]}" + blacklight_folders.folders_path + "/" + @folder.id.to_s
             end
           end
         end
@@ -84,7 +84,7 @@ module Blacklight::Folders
 
     def destroy
       @folder.destroy
-      redirect_to "/#{session[:campus]}" + blacklight_folders.folders_path, notice: "Folder \"#{@folder.name}\" was successfully deleted."
+      redirect_to "/#{params[:campus]}" + blacklight_folders.folders_path, notice: "Folder \"#{@folder.name}\" was successfully deleted."
     end
 
     def add_bookmarks
