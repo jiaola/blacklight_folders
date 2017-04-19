@@ -43,6 +43,19 @@ module Blacklight::Folders
         query = query_ids.blank? ? '' : "id:(#{query_ids})"
         solr_repository.search(q: query, qt: 'document', rows: rows).tap do |response|
           response.order = doc_ids
+          fix_position doc_ids, response
+        end
+      end
+    end
+
+    # Folder items are not coming back in the user sort order
+    def fix_position (doc_ids, response)
+      response_tmp = response.clone
+      doc_ids.each_with_index do |doc_id ,i|
+        response_tmp.documents.each do |doc|
+          if doc['id'] == doc_id
+            response.documents[i] = doc
+          end
         end
       end
     end
