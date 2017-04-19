@@ -20,7 +20,7 @@ Blacklight.onLoad(function(){
 
     $.ajax({
       type: "PATCH",
-      url: '/blacklight/folders/' + folderId + '.json',
+      url: '/myfolders/folders/' + folderId + '.json',
       data: { folder: {items_attributes: items}},
       success: function(data, status){
       }
