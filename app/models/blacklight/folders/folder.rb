@@ -49,7 +49,7 @@ module Blacklight::Folders
     end
 
     # Folder items are not coming back in the user sort order
-    def fix_position (doc_ids, response)
+    def fix_position(doc_ids, response)
       response_tmp = response.clone
       doc_ids.each_with_index do |doc_id ,i|
         response_tmp.documents.each do |doc|
