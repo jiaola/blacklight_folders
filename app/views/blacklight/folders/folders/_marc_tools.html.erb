@@ -1,10 +1,10 @@
-  <% if @folder.documents.any? {|d| d.exports_as? :endnote } %>
+<% if @folder.documents.any? {|d| d.exports_as? :endnote } %>
     <li class="endnote">
-    <%= link_to t('blacklight.tools.endnote'), { format: :endnote }, class: "btn btn-default", id: "endnoteLink" %>
+      <%= link_to t('blacklight.tools.endnote'), request.fullpath + '.endnote', class: "btn btn-default", id: "endnoteLink" %>
     </li>
-  <% end %>
-  <% if @folder.documents.any? {|d| d.exports_as? :refworks_marc_txt } %>
+<% end %>
+<% if @folder.documents.any? {|d| d.exports_as? :refworks_marc_txt } %>
     <li class="refworks">
-    <%= link_to t('blacklight.tools.refworks'), refworks_export_url(url: folder_export_url(@folder, :refworks_marc_txt)), class: "btn btn-default", id: "refworksLink" %>
+      <%= link_to t('blacklight.tools.refworks'), refworks_export_url(url: folder_export_url(@folder, :refworks_marc_txt)), class: "btn btn-default", id: "refworksLink" %>
     </li>
-  <% end %>
+<% end %>
